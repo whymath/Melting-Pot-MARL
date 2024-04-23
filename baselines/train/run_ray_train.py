@@ -53,7 +53,7 @@ def get_cli_args():
   parser.add_argument(
       "--exp",
       type=str,
-      choices = ['pd_arena','al_harvest','clean_up','territory_rooms'],
+      choices = ['pd_arena','al_harvest','clean_up','territory_rooms','day_care','commons_harvest__partnership','commons_harvest__open','commons_harvest__closed'],
       default="pd_arena",
       help="Name of the substrate to run",
   )
@@ -135,7 +135,9 @@ if __name__ == "__main__":
 
   # Setup WanDB 
   if "WANDB_API_KEY" in os.environ and args.wandb:
-    wandb_project = f'{args.exp}_{args.framework}'
+    # wandb_project = f'{args.exp}_{args.framework}'
+    wandb_project = f'meltingpot_{args.exp}_{args.framework}'
+    # wandb_project = "meltingpot_marl"
     wandb_group = "meltingpot"
 
     # Set up Weights And Biases logging if API key is set in environment variable.
