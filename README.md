@@ -1,29 +1,26 @@
-# Melting Pot Contest @ Neurips 2023
-Official Repository for Melting Pot Contest Experiments
+#  AI Alignment Project for Cooperative MARL
 
->**NOTE:** This repository provides a basic startup code for training RLLIB agents on Melting Pot.
-We plan to add additional support including more examples,
-benchmarked configs and GCP compute setup over the next couple of weeks. We will
-also make any necessary updates based on feedback from participants. Hence, it is recommended
-to sync up your fork every few days for next couple of weeks. We will post in discussion
-forums about any updates as they become available.
+This is a project led by [Gema Parreno](https://github.com/SoyGema) to explore cooperative behavior in multi-agent reinforcement learning. It is currently under development and the research document can be found [here](https://docs.google.com/document/d/1I0PSGQzjE7XYgp2RK7zeijA3fGBJ80TQMMMU-SMo7Uk/edit?usp=sharing).
+
+>**NOTE:** This repository is complementary to the primary repository for the project [here](https://github.com/SoyGema/MARL-Melting-pot). It adds additional substrates and scerarios to [this baseline repo](https://github.com/rstrivedi/Melting-Pot-Contest-2023), which was a submission to [this contest](https://www.aicrowd.com/challenges/meltingpot-challenge-2023).
+
 
 # Table of Contents
 - [Substrates and Scenarios](#substrates-and-scenarios)
 - [Installation Guidelines](#installation-guidelines)
 - [Run Training](#run-training)
 - [Run Evaluation](#run-evaluation)
+- [Visualization](#visualization)
+- [Logging](#logging)
+  - [Wandb Logging](#wandb-logging)
+  - [Tensorboard Logging](#tensorboard-logging)
 - [Code Structure](#code-structure)
-- [How to Guide](#how-to-guide)
-  - [Make submission](#make-submission)
-  - [Visualization](#visualization)
-  - [Logging](#logging)
 - [Identified Issues with Ray 2.6.1](#identified-issues-with-ray-2.6.1)
+
 
 ## Substrates and Scenarios
 
-For this contest, we will focus on following 4 substrates and we list the corresponding
-validation scenarios that your submission will be evaluated on during development phase:
+For the contest the focus was on 4 substrates and their corresponding validation scenarios, however we have added `day_care` and multiple variations of `commons_harvest` as well:
 
 | Substrate | Scenarios |
 | --------- | --------- |
@@ -43,10 +40,20 @@ validation scenarios that your submission will be evaluated on during developmen
 | | prisoners_dilemma_in_the_matrix__arena_3 |
 | | prisoners_dilemma_in_the_matrix__arena_4 |
 | | prisoners_dilemma_in_the_matrix__arena_5 |
-| territory__rooms | territory__rooms_0 |
-| | territory__rooms_1 |
-| | territory__rooms_2 |
-| | territory__rooms_3 |
+| day_care | daycare_0 |
+| commons_harvest__partnership | commons_harvest__partnership_0 |
+| | commons_harvest__partnership_1 |
+| | commons_harvest__partnership_2 |
+| | commons_harvest__partnership_3 |
+| | commons_harvest__partnership_4 |
+| | commons_harvest__partnership_5 |
+| commons_harvest__open | commons_harvest__open_0 |
+| | commons_harvest__open_1 |
+| commons_harvest__closed | commons_harvest__closed_0 |
+| | commons_harvest__closed_1 |
+| | commons_harvest__closed_2 |
+| | commons_harvest__closed_3 |
+
 
 ## Installation Guidelines
 
@@ -65,10 +72,6 @@ SYSTEM_VERSION_COMPAT=0 pip install dmlab2d
 pip install -e .
 sh ray_patch.sh
 ```
-
-### Google Cloud Platform Setup
-
-Coming Soon!
 
 
 ## Run Training
@@ -104,6 +107,7 @@ OPTIONS:
 > For torch backend, you may need to prepend the above command with CUDA_VISIBLE_DEVICE=[DEVICE IDs]
 if your algorithm does not seem to find GPU when enabled.
 
+
 ## Run Evaluation
 
 ```
@@ -126,6 +130,55 @@ OPTIONS:
   --video_dir VIDEO_DIR
                         Directory where you want to store evaluation videos
 ```
+
+
+## Visualization
+---
+### How to render trained models?
+
+```
+python baselines/train/render_models.py [OPTIONS]
+```
+```
+OPTIONS:
+  -h, --help            show this help message and exit
+  --config_dir CONFIG_DIR
+                        Directory where your experiment config (params.json) is located
+  --policies_dir POLICIES_DIR
+                        Directory where your trained policies are located
+  --horizon HORIZON     No. of environment timesteps to render models
+```
+
+### How to visualize scenario plays?
+
+You can also generate videos of agents behavior in various scenarios during local evaluation.
+To do this, set `create_videos=True` and `video_dir='<PATH to video directory>'` while running evaluation.
+If `eval_on_scenario=False`, this will create video plays of evaluation on substrate.
+
+```
+python baselines/evaluation/evaluate.py --create_videos=True --video_dir='' [OPTIONS]
+```
+
+**Note:** The script for generating these videos is located in `VideoSubject` class in `meltingpot/utils/evaluation/evaluation.py`. Modify this class to play with video properties such as codec, fps etc. or use different video writer. If you do not use meltingpot code from this repo, we have found that the generated videos are rendered very tiny. To fix that, add `rgb_frame = rgb_frame.repeat(scale, axis=0).repeat(scale, axis=1)` after `line 88` to extrapolate the image, where we used `scale=32`.
+
+
+## Logging
+---
+You can use either Wandb or Tensorboard to log and visualize your training landscape. The install setup provided includes support for both of them.
+
+### Wandb Logging
+
+To setup Wandb:
+
+1. Create an account on [Wandb](https://wandb.ai) website
+2. Get the API key from your account and set corresponding environment variable using `export WANDB_API_KEY=<Your Key>`
+3. Enable Wandb logging during training using  `python run_ray_train.py --wandb=True`
+
+### Tensorboard Logging
+
+To visualize your results with TensorBoard, run: `tensorboard --logdir <results_dir>`
+
+
 ## Code Structure
 
 ```
@@ -142,64 +195,10 @@ OPTIONS:
     |── wrappers        # Example code to write wrappers around your environment for added functionality
 ```
 
-## How to Guide
 
+## Identified Issues with Ray 2.6.1
 
-### Make Submission
----
-The trained models will be available in the results folder configured by you.
-Please refer to the guidelines on AICrowd [submision-starter-kit](https://gitlab.aicrowd.com/aicrowd/challenges/meltingpot-2023/meltingpot-2023-starter-kit) to make a
-submission using the trained checkpoints.
-
-### Visualization
----
-#### How to render trained models?
-
-```
-python baselines/train/render_models.py [OPTIONS]
-```
-```
-OPTIONS:
-  -h, --help            show this help message and exit
-  --config_dir CONFIG_DIR
-                        Directory where your experiment config (params.json) is located
-  --policies_dir POLICIES_DIR
-                        Directory where your trained policies are located
-  --horizon HORIZON     No. of environment timesteps to render models
-```
-
-#### How to visualize scenario plays?
-
-You can also generate videos of agents behavior in various scenarios during local evaluation.
-To do this, set `create_videos=True` and `video_dir='<PATH to video directory>'` while running evaluation.
-If `eval_on_scenario=False`, this will create video plays of evaluation on substrate.
-
-```
-python baselines/evaluation/evaluate.py --create_videos=True --video_dir='' [OPTIONS]
-```
-
-**Note:** The script for generating these videos is located in `VideoSubject` class in `meltingpot/utils/evaluation/evaluation.py`. Modify this class to play with video properties such as codec, fps etc. or use different video writer. If you do not use meltingpot code from this repo, we have found that the generated videos are rendered very tiny. To fix that, add `rgb_frame = rgb_frame.repeat(scale, axis=0).repeat(scale, axis=1)` after `line 88` to extrapolate the image, where we used `scale=32`.   
-
-### Logging
----
-You can use either Wandb or Tensorboard to log and visualize your training landscape. The install setup provided includes support for both of them.
-
-#### WanDB Logging
-
-To setup Wandb:
-
-1. Create an account on [Wandb](https://wandb.ai) website
-2. Get the API key from your account and set corresponding environment variable using `export WANDB_API_KEY=<Your Key>`
-3. Enable Wandb logging during training using  `python run_ray_train.py --wandb=True`
-
-#### Tensorboard Logging
-
-To visualize your results with TensorBoard, run: `tensorboard --logdir <results_dir>`
-
-
-## Identified issues with Ray 2.6.1
-
-During our training, we found issues with both tf and torch backends that leads to errors when using default lstm wrapper provided by rllib. Our installation script above provides fix patches `ray_patch.sh` for the same. But if you use the manual installation approach, the following fixes need to be applied after installation:
+During training, issues were found with both tf and torch backends that leads to errors when using default lstm wrapper provided by rllib. The `ray_patch.sh` installation script provides fix patches for the same. But if you use the manual installation approach, the following fixes need to be applied after installation:
 
 *  For tf users:
 
