@@ -53,6 +53,12 @@ For the contest the focus was on 4 substrates and their corresponding validation
 | | commons_harvest__closed_1 |
 | | commons_harvest__closed_2 |
 | | commons_harvest__closed_3 |
+| | commons_harvest__private_property_pc_0 |
+| | commons_harvest__private_property_pc_1 |
+| | commons_harvest__private_property_0 |
+| | commons_harvest__private_property_1 |
+| | commons_harvest__open_disable_zapping_0 |
+| | commons_harvest__open_disable_zapping_1 |
 
 
 ## Installation Guidelines
