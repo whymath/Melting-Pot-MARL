@@ -40,6 +40,8 @@ SUPPORTED_SCENARIOS = [
     'commons_harvest__private_property_pc_1',
     'commons_harvest__private_property_0',
     'commons_harvest__private_property_1',
+    'commons_harvest__open_disable_zapping_0',
+    'commons_harvest__open_disable_zapping_1',
 ]
 
 IGNORE_KEYS = ['WORLD.RGB', 'INTERACTION_INVENTORIES', 'NUM_OTHERS_WHO_CLEANED_THIS_STEP']
@@ -66,10 +68,12 @@ def get_experiment_config(args, default_config):
     elif args.exp == 'commons_harvest__private_property_pc':
         substrate_name = "commons_harvest__private_property_pc"
     elif args.exp == 'commons_harvest__private_property':
-        substrate_name = "commons_harvest__private_property"    
+        substrate_name = "commons_harvest__private_property"
+    elif args.exp == 'commons_harvest__open_disable_zapping':
+        substrate_name = "commons_harvest__open_disable_zapping"     
     else:
         raise Exception("Please set --exp to be one of ['pd_arena', 'al_harvest', 'clean_up', \
-                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property']. Other substrates are not supported.")
+                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping']. Other substrates are not supported.")
 
     # Fetch player roles
     player_roles = substrate.get_config(substrate_name).default_player_roles
