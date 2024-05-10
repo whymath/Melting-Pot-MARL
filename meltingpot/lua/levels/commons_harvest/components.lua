@@ -239,9 +239,83 @@ function DensityRegrow:_endLive()
   end
 end
 
+local Farmer = class.Class(component.Component)
+
+function Farmer:__init__(kwargs)
+  kwargs = args.parse(kwargs, {
+      {'name', args.default('Farmer')},
+      -- observation cooldown
+      {'observationCooldownTime', args.numberType},
+      {'observationRadius', args.numberType},
+      -- This doesn't do anything yet...
+      {'observationColor', args.default({252, 252, 106}), args.tableType},
+      -- TODO: no penality implemented yet
+      {'penaltyForEdibleDisappearing', args.numberType},
+      {'rewardForEdibleVisible', args.numberType}
+  })
+  Farmer.Base.__init__(self, kwargs)
+
+  self._config.observationCooldownTime = kwargs.observationCooldownTime
+  self._config.observationRadius = kwargs.observationRadius
+  self._config.observationColor = kwargs.observationColor
+  self._config.penaltyForEdibleDisappearing = kwargs.penaltyForEdibleDisappearing
+  self._config.rewardForEdibleVisible = kwargs.rewardForEdibleVisible
+end
+
+function Farmer:registerUpdaters(updaterRegistry)
+
+  local getEdibleCount = function(lyr)
+    local layer = lyr
+    local transform = self.gameObject:getComponent('Transform')
+    local queryObjects = transform:queryDisc(layer, self._config.observationRadius)
+    local edibleCount = 0
+    
+    for _, obj in ipairs(queryObjects) do
+      if (obj ~= nil and obj:hasComponent('Edible')) then
+        edibleCount = edibleCount + 1
+      end
+    end
+
+    return edibleCount
+  end
+
+  local observe = function()
+    -- Execute the observation if applicable.
+    local avatar = self.gameObject:getComponent('Avatar')
+    if avatar:isAlive() then
+      if self._config.observationCooldownTime >= 0 then
+        if self._coolingTimer > 0 then
+          self._coolingTimer = self._coolingTimer - 1
+        else
+          self._coolingTimer = self._config.observationCooldownTime
+          -- Edible objects like Apple prefabs are on 'lowerPhysical' layer
+          local edibleCount = getEdibleCount('lowerPhysical')
+          -- Reward for observing edible objects
+          avatar:addReward(self._config.rewardForEdibleVisible * edibleCount)
+        end
+      end
+    end
+  end
+  -- greater priortity?
+  updaterRegistry:registerUpdater{
+      updateFn = observe,
+      priority = 140,
+  }
+end
+
+function Farmer:reset()
+  self._coolingTimer = 0
+end
+
+function Farmer:start()
+  -- Set the observation cooldown timer to its `ready` state (i.e. coolingTimer = 0).
+  self._coolingTimer = 0
+end
+
 local allComponents = {
     Neighborhoods = Neighborhoods,
     DensityRegrow = DensityRegrow,
+    Farmer = Farmer,
 }
 
 component_registry.registerAllComponents(allComponents)
