@@ -42,7 +42,8 @@ SUPPORTED_SCENARIOS = [
     'commons_harvest__private_property_1',
     'commons_harvest__open_disable_zapping_0',
     'commons_harvest__open_disable_zapping_1',
-    'commons_harvest__open_abundance'
+    'commons_harvest__open_abundance_0',
+    'commons_harvest__open_abundance_1',
 ]
 
 IGNORE_KEYS = ['WORLD.RGB', 'INTERACTION_INVENTORIES', 'NUM_OTHERS_WHO_CLEANED_THIS_STEP']
