@@ -53,10 +53,11 @@ def get_cli_args():
   parser.add_argument(
       "--exp",
       type=str,
-      choices = ['pd_arena','al_harvest','clean_up','territory_rooms','day_care','commons_harvest__partnership','commons_harvest__open','commons_harvest__private_property_pc','commons_harvest__private_property','commons_harvest__open_disable_zapping','commons_harvest__closed'],
+      choices = ['pd_arena','al_harvest','clean_up','territory_rooms','day_care','commons_harvest__partnership','commons_harvest__open','commons_harvest__private_property_pc','commons_harvest__private_property','commons_harvest__open_disable_zapping','commons_harvest__closed', 'commons_harvest__open_abundance'],
       default="pd_arena",
       help="Name of the substrate to run",
-  )
+  ) #Todo, fetch this list of choices from elswhere? stuff like this is a maintence headache.
+
   parser.add_argument(
       "--seed",
       type=int,
@@ -96,6 +97,13 @@ def get_cli_args():
         help="Whether this script should be run as a test.",
   )
 
+  #parser.add_argument(
+  #      "--num_iterations",
+  #      type=int,
+  #      default=10,
+  #      help="The number of training iterations to run (lower=faster)"
+  #) #Todo: check this works, add to readme.
+
   args = parser.parse_args()
   print("Running trails with the following arguments: ", args)
   return args
@@ -122,6 +130,11 @@ if __name__ == "__main__":
 
   # Fetch experiment configurations
   configs, exp_config, tune_config = get_experiment_config(args, default_config)
+
+  #if args.num_iterations:
+  #  print(f"Setting number of training interation(s) to {args.num_iterations}")
+  #  exp_config["stop"]["training_iteration"] = int(args.num_iterations)
+
   
   # Ensure GPU is available if set to True
   if configs.num_gpus > 0:
