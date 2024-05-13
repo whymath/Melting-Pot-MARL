@@ -109,7 +109,7 @@ def get_experiment_config(args, default_config):
         "stopping": {
                     #"timesteps_total": 1000000,
                     # "training_iteration": 1,
-                    "training_iteration": 1000,
+                    "training_iteration": 10,
                     #"episode_reward_mean": 100,
         },
         "num_checkpoints": 5,
@@ -137,10 +137,8 @@ def get_experiment_config(args, default_config):
     run_configs.sgd_minibatch_size = params_dict['sgd_minibatch_size']
     run_configs.preprocessor_pref = None
     run_configs._disable_preprocessor_api = params_dict['disable_observation_precprocessing']
-    #run_configs.rl_module(_enable_rl_module_api=params_dict['use_new_rl_modules'])
-    run_configs.experimental(_enable_new_api_stack=params_dict['use_new_rl_modules'])
-    #run_configs.training(_enable_learner_api=params_dict['use_new_learner_api'])
-    run_configs.experimental(_enable_new_api_stack=params_dict['use_new_learner_api'])
+    run_configs.rl_module(_enable_rl_module_api=params_dict['use_new_rl_modules'])
+    run_configs.training(_enable_learner_api=params_dict['use_new_learner_api'])
     run_configs = run_configs.framework(params_dict['framework'])
     run_configs.log_level = params_dict['logging']
     run_configs.seed = params_dict['seed']

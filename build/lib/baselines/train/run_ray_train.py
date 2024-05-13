@@ -171,7 +171,7 @@ if __name__ == "__main__":
       trainer,
       param_space=configs.to_dict(),
       run_config=air.RunConfig(name = exp_config['name'], callbacks=wdb_callbacks, local_dir=exp_config['dir'], 
-                               stop=exp_config['stop'], checkpoint_config=ckpt_config, verbose=1),
+                               stop=exp_config['stop'], checkpoint_config=ckpt_config, verbose=0),
   ).fit()
 
   best_result = results.get_best_result(metric="episode_reward_mean", mode="max")
