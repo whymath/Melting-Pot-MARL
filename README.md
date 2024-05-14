@@ -60,6 +60,7 @@ For the contest the focus was on 4 substrates and their corresponding validation
 | | commons_harvest__open_disable_zapping_0 |
 | | commons_harvest__open_disable_zapping_1 |
 | | commons_harvest__open_abundance |
+| | commons_harvest__open_scarcity |
 
 ## Installation Guidelines
 
