@@ -135,6 +135,7 @@ if __name__ == "__main__":
     print("evaluate_on_scenario=False. Evaluating on substrate found in the config file provided.")
   
   results, scenario = run_evaluation(args)
+  results.to_csv(f'{args.config_dir}/results_evals.csv',index=False)
   print(f"Results for {scenario}: ")
   with pd.option_context('display.max_rows', None, 'display.max_columns', None):
       print(results)
