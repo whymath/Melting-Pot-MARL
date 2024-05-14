@@ -42,15 +42,18 @@ SUPPORTED_SCENARIOS = [
     'commons_harvest__private_property_1',
     'commons_harvest__open_disable_zapping_0',
     'commons_harvest__open_disable_zapping_1',
+    'commons_harvest__open_abundance_0',
+    'commons_harvest__open_abundance_1',
+    'commons_harvest__open_scarcity_0',
+    'commons_harvest__open_scarcity_1',
     'commons_harvest__farmer_0',
-     'commons_harvest__farmer_1',
+    'commons_harvest__farmer_1',
 ]
 
 IGNORE_KEYS = ['WORLD.RGB', 'INTERACTION_INVENTORIES', 'NUM_OTHERS_WHO_CLEANED_THIS_STEP']
 
 
 def get_experiment_config(args, default_config):
-    
     if args.exp == 'pd_arena':
         substrate_name = "prisoners_dilemma_in_the_matrix__arena"
     elif args.exp == 'al_harvest':
@@ -72,12 +75,10 @@ def get_experiment_config(args, default_config):
     elif args.exp == 'commons_harvest__private_property':
         substrate_name = "commons_harvest__private_property"
     elif args.exp == 'commons_harvest__open_disable_zapping':
-        substrate_name = "commons_harvest__open_disable_zapping"
-    elif args.exp == 'commons_harvest__farmer':
-        substrate_name = "commons_harvest__farmer"
+        substrate_name = "commons_harvest__open_disable_zapping"     
     else:
         raise Exception("Please set --exp to be one of ['pd_arena', 'al_harvest', 'clean_up', \
-                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping','commons_harvest__farmer']. Other substrates are not supported.")
+                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping']. Other substrates are not supported.")
 
     # Fetch player roles
     player_roles = substrate.get_config(substrate_name).default_player_roles
@@ -125,7 +126,7 @@ def get_experiment_config(args, default_config):
         "stopping": {
                     #"timesteps_total": 1000000,
                     # "training_iteration": 1,
-                    "training_iteration": 10,
+                    "training_iteration": 2,
                     #"episode_reward_mean": 100,
         },
         "num_checkpoints": 5,

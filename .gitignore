@@ -23,7 +23,12 @@ __pycache__/
 
 .env
 .venv
+venv/
 
 .DS_Store
 assets/
 results/
+videos/
+test_train_results/
+.vscode/
+*.Identifier
