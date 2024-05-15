@@ -24,7 +24,7 @@ def get_cli_args():
   )
   parser.add_argument(
       "--num_gpus",
-      type=int,
+      type=float,
       default=0,
       help="Number of GPUs to run on (can be a fraction)",
   )
@@ -53,7 +53,7 @@ def get_cli_args():
   parser.add_argument(
       "--exp",
       type=str,
-      choices = ['pd_arena','al_harvest','clean_up','territory_rooms','day_care','commons_harvest__partnership','commons_harvest__open','commons_harvest__private_property_pc','commons_harvest__private_property','commons_harvest__open_disable_zapping','commons_harvest__closed', 'commons_harvest__open_abundance', 'commons_harvest__open_scarcity'],
+      choices = ['pd_arena','al_harvest','clean_up','territory_rooms','day_care','commons_harvest__partnership','commons_harvest__open','commons_harvest__private_property_pc','commons_harvest__private_property','commons_harvest__open_disable_zapping','commons_harvest__closed', 'commons_harvest__open_abundance', 'commons_harvest__open_scarcity','commons_harvest__farmer'],
       default="pd_arena",
       help="Name of the substrate to run",
   ) #Todo, fetch this list of choices from elswhere? stuff like this is a maintence headache.

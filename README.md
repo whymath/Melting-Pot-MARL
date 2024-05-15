@@ -49,6 +49,8 @@ For the contest the focus was on 4 substrates and their corresponding validation
 | | commons_harvest__partnership_5 |
 | commons_harvest__open | commons_harvest__open_0 |
 | | commons_harvest__open_1 |
+| | commons_harvest__farmer | commons_harvest__open_0 |
+| | commons_harvest__farmer_1 |
 | commons_harvest__closed | commons_harvest__closed_0 |
 | | commons_harvest__closed_1 |
 | | commons_harvest__closed_2 |
