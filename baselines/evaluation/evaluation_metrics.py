@@ -18,6 +18,25 @@ agents = [
     # Add more agents as needed
 ]
 
+# 1. Number of Apple Fields Depleted
+def calculate_depleted_fields(apple_fields):
+    return sum(1 for field in apple_fields if field['is_depleted'])
+
+# 2. Average Apple Regrowth Rate
+def calculate_average_regrowth_rate(apple_fields):
+    total_regrowth = sum(field['regrown_apples'] for field in apple_fields)
+    return total_regrowth / len(apple_fields)
+
+# 3. Total Apples Harvested
+def calculate_total_apples_harvested(apple_fields):
+    return sum(field['harvested_apples'] for field in apple_fields)
+
+# 4. Harvest-to-Regrowth Ratio
+def calculate_harvest_to_regrowth_ratio(apple_fields):
+    total_harvested = sum(field['harvested_apples'] for field in apple_fields)
+    total_regrown = sum(field['regrown_apples'] for field in apple_fields)
+    return total_harvested / total_regrown if total_regrown > 0 else float('inf')
+
 # 5. Cooperation Index
 def calculate_cooperation_index(agents):
     total_cooperative_actions = sum(agent['cooperative_actions'] for agent in agents)
