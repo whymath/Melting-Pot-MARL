@@ -75,10 +75,12 @@ def get_experiment_config(args, default_config):
     elif args.exp == 'commons_harvest__private_property':
         substrate_name = "commons_harvest__private_property"
     elif args.exp == 'commons_harvest__open_disable_zapping':
-        substrate_name = "commons_harvest__open_disable_zapping"     
+        substrate_name = "commons_harvest__open_disable_zapping"
+    elif args.exp == 'commons_harvest__farmer':
+        substrate_name = "commons_harvest__farmer"
     else:
         raise Exception("Please set --exp to be one of ['pd_arena', 'al_harvest', 'clean_up', \
-                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping']. Other substrates are not supported.")
+                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping', 'commons_harvest__farmer' ]. Other substrates are not supported.")
 
     # Fetch player roles
     player_roles = substrate.get_config(substrate_name).default_player_roles
