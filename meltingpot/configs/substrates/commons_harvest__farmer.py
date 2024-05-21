@@ -246,13 +246,14 @@ INSIDE_SPAWN_POINT = {
 # Primitive action components.
 # pylint: disable=bad-whitespace
 # pyformat: disable
-NOOP       = {"move": 0, "turn":  0}
-FORWARD    = {"move": 1, "turn":  0}
-STEP_RIGHT = {"move": 2, "turn":  0}
-BACKWARD   = {"move": 3, "turn":  0}
-STEP_LEFT  = {"move": 4, "turn":  0}
-TURN_LEFT  = {"move": 0, "turn": -1}
-TURN_RIGHT = {"move": 0, "turn":  1}
+NOOP       = {"move": 0, "turn":  0, "fireZap": 0}
+FORWARD    = {"move": 1, "turn":  0, "fireZap": 0}
+STEP_RIGHT = {"move": 2, "turn":  0, "fireZap": 0}
+BACKWARD   = {"move": 3, "turn":  0, "fireZap": 0}
+STEP_LEFT  = {"move": 4, "turn":  0, "fireZap": 0}
+TURN_LEFT  = {"move": 0, "turn": -1, "fireZap": 0}
+TURN_RIGHT = {"move": 0, "turn":  1, "fireZap": 0}
+FIRE_ZAP   = {"move": 0, "turn":  0, "fireZap": 1}
 # pyformat: enable
 # pylint: enable=bad-whitespace
 
@@ -264,7 +265,9 @@ ACTION_SET = (
     STEP_RIGHT,
     TURN_LEFT,
     TURN_RIGHT,
+    FIRE_ZAP,
 )
+
 
 TARGET_SPRITE_SELF = {
     "name": "Self",
@@ -467,10 +470,11 @@ def create_avatar_object(player_idx: int,
                   "speed": 1.0,
                   "spawnGroup": spawn_group,
                   "postInitialSpawnGroup": "spawnPoints",
-                  "actionOrder": ["move", "turn"],
+                  "actionOrder": ["move", "turn", "fireZap"],
                   "actionSpec": {
                       "move": {"default": 0, "min": 0, "max": len(_COMPASS)},
                       "turn": {"default": 0, "min": -1, "max": 1},
+                      "fireZap": {"default": 0, "min": 0, "max": 1},
                   },
                   "view": {
                       "left": 5,
@@ -489,8 +493,22 @@ def create_avatar_object(player_idx: int,
               "observationRadius": 2,
               # no penalty implemented yet
               "penaltyForEdibleDisappearing": 0,
-              "rewardForEdibleVisible": 1,
+              "rewardForEdibleVisible": 0.01,
             }
+          },
+          {
+              "component": "Zapper",
+              "kwargs": {
+                  "cooldownTime": 2,
+                  "beamLength": 3,
+                  "beamRadius": 1,
+                  "framesTillRespawn": 4,
+                  "penaltyForBeingZapped": 0,
+                  "rewardForZapping": 0,
+              }
+          },
+          {
+              "component": "ReadyToShootObservation",
           }
       ]
   }
