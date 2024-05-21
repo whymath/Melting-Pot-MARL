@@ -1583,6 +1583,40 @@ SCENARIO_CONFIGS: Mapping[str, ScenarioConfig] = immutabledict.immutabledict(
                         'commons_harvest__open__pacifist_1'},
         },
     ),
+    commons_harvest__open_2=ScenarioConfig(
+        description=('focals visit bots who zap and harvest sustainably if ' +
+                     'they get a chance'),
+        tags={
+            'visitor',
+            'ownership',
+        },
+        substrate='commons_harvest__open',
+        roles=('default',) * 7,
+        is_focal=(True,) * 2 + (False,) * 5,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__open_3=ScenarioConfig(
+        description=('focals are resident, and are visited by bots who zap ' +
+                     'and harvest sustainably if they get a chance'),
+        tags={
+            'resident',
+            'ownership',
+        },
+        substrate='commons_harvest__open',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
     commons_harvest__partnership_0=ScenarioConfig(
         description='meeting good partners',
         tags={
@@ -1677,6 +1711,254 @@ SCENARIO_CONFIGS: Mapping[str, ScenarioConfig] = immutabledict.immutabledict(
             'default': {'commons_harvest__partnership__free_0',
                         'commons_harvest__partnership__free_1',
                         'commons_harvest__partnership__free_2',},
+        },
+    ),
+    commons_harvest__farmer_0=ScenarioConfig(
+        description=('focals are resident and visited by two bots who zap ' +
+                     'and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__farmer',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__free_0',
+                        'commons_harvest__open__free_1',},
+        },
+    ),
+    commons_harvest__farmer_1=ScenarioConfig(
+        description=('focals are resident and visited by two bots who ' +
+                     'are pacifist and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__farmer',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__pacifist_0',
+                        'commons_harvest__open__pacifist_1',},
+        },
+    ),
+    commons_harvest__farmer_2=ScenarioConfig(
+        description=('focals visit bots who zap and harvest sustainably if ' +
+                     'they get a chance'),
+        tags={
+            'visitor',
+            'ownership',
+        },
+        substrate='commons_harvest__farmer',
+        roles=('default',) * 7,
+        is_focal=(True,) * 2 + (False,) * 5,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__farmer_3=ScenarioConfig(
+        description=('focals are resident, and are visited by bots who zap ' +
+                     'and harvest sustainably if they get a chance'),
+        tags={
+            'resident',
+            'ownership',
+        },
+        substrate='commons_harvest__farmer',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__open_disable_zapping_0=ScenarioConfig(
+        description=('focals are resident and visited by two bots who zap ' +
+                     'and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__open_disable_zapping',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__free_0',
+                        'commons_harvest__open__free_1',},
+        },
+    ),
+    commons_harvest__open_disable_zapping_1=ScenarioConfig(
+        description=('focals are resident and visited by two bots who ' +
+                     'are pacifist and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__open_disable_zapping',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__pacifist_0',
+                        'commons_harvest__open__pacifist_1',},
+        },
+    ),
+    commons_harvest__open_disable_zapping_2=ScenarioConfig(
+        description=('focals visit bots who zap and harvest sustainably if ' +
+                     'they get a chance'),
+        tags={
+            'visitor',
+            'ownership',
+        },
+        substrate='commons_harvest__open_disable_zapping',
+        roles=('default',) * 7,
+        is_focal=(True,) * 2 + (False,) * 5,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__open_disable_zapping_3=ScenarioConfig(
+        description=('focals are resident, and are visited by bots who zap ' +
+                     'and harvest sustainably if they get a chance'),
+        tags={
+            'resident',
+            'ownership',
+        },
+        substrate='commons_harvest__open_disable_zapping',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__open_scarcity_0=ScenarioConfig(
+        description=('focals are resident and visited by two bots who zap ' +
+                     'and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__open_scarcity',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__free_0',
+                        'commons_harvest__open__free_1',},
+        },
+    ),
+    commons_harvest__open_scarcity_1=ScenarioConfig(
+        description=('focals are resident and visited by two bots who ' +
+                     'are pacifist and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__open_scarcity',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__pacifist_0',
+                        'commons_harvest__open__pacifist_1',},
+        },
+    ),
+    commons_harvest__open_scarcity_2=ScenarioConfig(
+        description=('focals visit bots who zap and harvest sustainably if ' +
+                     'they get a chance'),
+        tags={
+            'visitor',
+            'ownership',
+        },
+        substrate='commons_harvest__open_scarcity',
+        roles=('default',) * 7,
+        is_focal=(True,) * 2 + (False,) * 5,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__open_scarcity_3=ScenarioConfig(
+        description=('focals are resident, and are visited by bots who zap ' +
+                     'and harvest sustainably if they get a chance'),
+        tags={
+            'resident',
+            'ownership',
+        },
+        substrate='commons_harvest__open_scarcity',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__private_property_0=ScenarioConfig(
+        description=('focals are resident and visited by two bots who zap ' +
+                     'and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__private_property',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__free_0',
+                        'commons_harvest__open__free_1',},
+        },
+    ),
+    commons_harvest__private_property_1=ScenarioConfig(
+        description=('focals are resident and visited by two bots who ' +
+                     'are pacifist and harvest unsustainably'),
+        tags={
+            'resident',
+        },
+        substrate='commons_harvest__private_property',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__open__pacifist_0',
+                        'commons_harvest__open__pacifist_1',},
+        },
+    ),
+    commons_harvest__private_property_2=ScenarioConfig(
+        description=('focals visit bots who zap and harvest sustainably if ' +
+                     'they get a chance'),
+        tags={
+            'visitor',
+            'ownership',
+        },
+        substrate='commons_harvest__private_property',
+        roles=('default',) * 7,
+        is_focal=(True,) * 2 + (False,) * 5,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
+        },
+    ),
+    commons_harvest__private_property_3=ScenarioConfig(
+        description=('focals are resident, and are visited by bots who zap ' +
+                     'and harvest sustainably if they get a chance'),
+        tags={
+            'resident',
+            'ownership',
+        },
+        substrate='commons_harvest__private_property',
+        roles=('default',) * 7,
+        is_focal=(True,) * 5 + (False,) * 2,
+        bots_by_role={
+            'default': {'commons_harvest__closed__free_0',
+                        'commons_harvest__closed__free_1',
+                        'commons_harvest__closed__free_2',
+                        'commons_harvest__closed__free_3'},
         },
     ),
     coop_mining_0=ScenarioConfig(
