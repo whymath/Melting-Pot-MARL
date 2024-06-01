@@ -53,6 +53,8 @@ import numpy as np
 
 # Warning: setting `_ENABLE_DEBUG_OBSERVATIONS = True` may cause slowdown.
 _ENABLE_DEBUG_OBSERVATIONS = False
+# Prints out when an avatar eats an apple.
+_ENABLE_EAT_PRINTING = False
 
 APPLE_RESPAWN_RADIUS = 2.0
 REGROWTH_PROBABILITIES = [0.0, 0.0025, 0.005, 0.025]
@@ -376,6 +378,7 @@ def create_apple_prefab(regrowth_radius=-1.0,  # pylint: disable=dangerous-defau
                   "liveState": "apple",
                   "waitState": "appleWait",
                   "rewardForEating": 1.0,
+                  "printEat": _ENABLE_EAT_PRINTING,
               }
           },
           {

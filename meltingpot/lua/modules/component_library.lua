@@ -958,12 +958,14 @@ function Edible:__init__(kwargs)
       {'liveState', args.stringType},
       {'waitState', args.stringType},
       {'rewardForEating', args.numberType},
+      {'printEat', args.booleanType},
   })
   Edible.Base.__init__(self, kwargs)
 
   self._config.liveState = kwargs.liveState
   self._config.waitState = kwargs.waitState
   self._config.rewardForEating = kwargs.rewardForEating
+  self._config.printEat = kwargs.printEat
 end
 
 function Edible:reset()
@@ -995,6 +997,9 @@ function Edible:onEnter(enteringGameObject, contactName)
       avatarComponent:addReward(self._config.rewardForEating)
       events:add('edible_consumed', 'dict',
                  'player_index', avatarComponent:getIndex())  -- int
+      if self._printEat then
+        print("Avatar " .. avatarComponent:getIndex() .. " consumed apple!")
+      end
       -- Change the edible to its wait (disabled) state.
       self.gameObject:setState(self._waitState)
     end
