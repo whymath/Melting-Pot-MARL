@@ -1,16 +1,16 @@
 #  AI Alignment Project for Cooperative MARL
 
-This is a project led by [Gema Parreno](https://github.com/SoyGema) to explore cooperative behavior in multi-agent reinforcement learning using the DeepMind Melting Pot 2.0 framework, and the research document can be found [here](https://docs.google.com/document/d/1I0PSGQzjE7XYgp2RK7zeijA3fGBJ80TQMMMU-SMo7Uk/edit?usp=sharing).
+This is a project led by [Gema Parreno](https://github.com/SoyGema) to explore cooperative behavior in multi-agent reinforcement learning using the DeepMind Melting Pot 2.0 framework (see [research document](https://docs.google.com/document/d/1I0PSGQzjE7XYgp2RK7zeijA3fGBJ80TQMMMU-SMo7Uk/edit?usp=sharing)).
 
 The contributors to this project are:
-[Gema Parreño](https://github.com/SoyGema)
-[Gonçalo Paulo](https://github.com/SrGonao)
-[Peter Francis](https://github.com/rockretep)
-[Cameron Tice](https://github.com/camtice)
-[Chris Pond](https://github.com/chris-p-bacon1)
-[Yohan Mathew](https://github.com/whymath)
-Tomasz Steifer
-[Marina Levay](https://github.com/marilevay)
+- [Gema Parreño](https://github.com/SoyGema)
+- [Gonçalo Paulo](https://github.com/SrGonao)
+- [Peter Francis](https://github.com/rockretep)
+- [Cameron Tice](https://github.com/camtice)
+- [Chris Pond](https://github.com/chris-p-bacon1)
+- [Yohan Mathew](https://github.com/whymath)
+- Tomasz Steifer
+- [Marina Levay](https://github.com/marilevay)
 
 >**NOTE:** This repository adds additional substrates, scerarios and experiments to [this baseline repo](https://github.com/rstrivedi/Melting-Pot-Contest-2023), which was a submission to [this contest](https://www.aicrowd.com/challenges/meltingpot-challenge-2023). Another early repository for the project can be found [here](https://github.com/SoyGema/MARL-Melting-pot). 
 
@@ -59,7 +59,11 @@ For the contest the focus was on 4 substrates and their corresponding validation
 | | commons_harvest__partnership_5 |
 | commons_harvest__open | commons_harvest__open_0 |
 | | commons_harvest__open_1 |
-| | commons_harvest__farmer | commons_harvest__open_0 |
+| | commons_harvest__open_disable_zapping_0 |
+| | commons_harvest__open_disable_zapping_1 |
+| | commons_harvest__open_abundance |
+| | commons_harvest__open_scarcity |
+| | commons_harvest__farmer | commons_harvest__farmer_0 |
 | | commons_harvest__farmer_1 |
 | commons_harvest__closed | commons_harvest__closed_0 |
 | | commons_harvest__closed_1 |
@@ -69,10 +73,6 @@ For the contest the focus was on 4 substrates and their corresponding validation
 | | commons_harvest__private_property_pc_1 |
 | | commons_harvest__private_property_0 |
 | | commons_harvest__private_property_1 |
-| | commons_harvest__open_disable_zapping_0 |
-| | commons_harvest__open_disable_zapping_1 |
-| | commons_harvest__open_abundance |
-| | commons_harvest__open_scarcity |
 
 ## Installation Guidelines
 
