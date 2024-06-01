@@ -1,8 +1,18 @@
 #  AI Alignment Project for Cooperative MARL
 
-This is a project led by [Gema Parreno](https://github.com/SoyGema) to explore cooperative behavior in multi-agent reinforcement learning. It is currently under development and the research document can be found [here](https://docs.google.com/document/d/1I0PSGQzjE7XYgp2RK7zeijA3fGBJ80TQMMMU-SMo7Uk/edit?usp=sharing).
+This is a project led by [Gema Parreno](https://github.com/SoyGema) to explore cooperative behavior in multi-agent reinforcement learning using the DeepMind Melting Pot 2.0 framework, and the research document can be found [here](https://docs.google.com/document/d/1I0PSGQzjE7XYgp2RK7zeijA3fGBJ80TQMMMU-SMo7Uk/edit?usp=sharing).
 
->**NOTE:** This repository is complementary to the primary repository for the project [here](https://github.com/SoyGema/MARL-Melting-pot). It adds additional substrates and scerarios to [this baseline repo](https://github.com/rstrivedi/Melting-Pot-Contest-2023), which was a submission to [this contest](https://www.aicrowd.com/challenges/meltingpot-challenge-2023).
+The contributors to this project are:
+[Gema Parreño](https://github.com/SoyGema)
+[Gonçalo Paulo](https://github.com/SrGonao)
+[Peter Francis](https://github.com/rockretep)
+[Cameron Tice](https://github.com/camtice)
+[Chris Pond](https://github.com/chris-p-bacon1)
+[Yohan Mathew](https://github.com/whymath)
+Tomasz Steifer
+[Marina Levay](https://github.com/marilevay)
+
+>**NOTE:** This repository adds additional substrates, scerarios and experiments to [this baseline repo](https://github.com/rstrivedi/Melting-Pot-Contest-2023), which was a submission to [this contest](https://www.aicrowd.com/challenges/meltingpot-challenge-2023). Another early repository for the project can be found [here](https://github.com/SoyGema/MARL-Melting-pot). 
 
 
 # Table of Contents
