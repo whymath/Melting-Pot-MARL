@@ -32,6 +32,8 @@ SUPPORTED_SCENARIOS = [
     'commons_harvest__partnership_5',
     'commons_harvest__open_0',
     'commons_harvest__open_1',
+    'commons_harvest__open_2',
+    'commons_harvest__open_3',
     'commons_harvest__closed_0',
     'commons_harvest__closed_1',
     'commons_harvest__closed_2',
@@ -40,14 +42,22 @@ SUPPORTED_SCENARIOS = [
     'commons_harvest__private_property_pc_1',
     'commons_harvest__private_property_0',
     'commons_harvest__private_property_1',
+    'commons_harvest__private_property_2',
+    'commons_harvest__private_property_3',
     'commons_harvest__open_disable_zapping_0',
     'commons_harvest__open_disable_zapping_1',
+    'commons_harvest__open_disable_zapping_2',
+    'commons_harvest__open_disable_zapping_3',
     'commons_harvest__open_abundance_0',
     'commons_harvest__open_abundance_1',
     'commons_harvest__open_scarcity_0',
     'commons_harvest__open_scarcity_1',
+    'commons_harvest__open_scarcity_2',
+    'commons_harvest__open_scarcity_3',
     'commons_harvest__farmer_0',
     'commons_harvest__farmer_1',
+    'commons_harvest__farmer_2',
+    'commons_harvest__farmer_3',
 ]
 
 IGNORE_KEYS = ['WORLD.RGB', 'INTERACTION_INVENTORIES', 'NUM_OTHERS_WHO_CLEANED_THIS_STEP']
@@ -75,10 +85,16 @@ def get_experiment_config(args, default_config):
     elif args.exp == 'commons_harvest__private_property':
         substrate_name = "commons_harvest__private_property"
     elif args.exp == 'commons_harvest__open_disable_zapping':
-        substrate_name = "commons_harvest__open_disable_zapping"     
+        substrate_name = "commons_harvest__open_disable_zapping"
+    elif args.exp == 'commons_harvest__farmer':
+        substrate_name = "commons_harvest__farmer"
+    elif args.exp == 'commons_harvest__open_abundance':
+        substrate_name = "commons_harvest__open_abundance"
+    elif args.exp == 'commons_harvest__open_scarcity':
+        substrate_name = "commons_harvest__open_scarcity"
     else:
         raise Exception("Please set --exp to be one of ['pd_arena', 'al_harvest', 'clean_up', \
-                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping']. Other substrates are not supported.")
+                        'territory_rooms','daycare','commons_harvest__partnership', 'commons_harvest__open','common_harvest_closed','commons_harvest__private_property_pc', 'commons_harvest__private_property','commons_harvest__open_disable_zapping', 'commons_harvest__farmer', ' 'commons_harvest__open_scarcity',  'commons_harvest__open_abundance' ]. Other substrates are not supported.")
 
     # Fetch player roles
     player_roles = substrate.get_config(substrate_name).default_player_roles
@@ -110,27 +126,31 @@ def get_experiment_config(args, default_config):
         "framework": args.framework,
 
         # agent model
-        "fcnet_hidden": (4, 4),
-        "post_fcnet_hidden": (16,),
+        #"fcnet_hidden": (4, 4),
+        #"post_fcnet_hidden": (16,),
+        "fcnet_hidden": (16, 16),
+        "post_fcnet_hidden": (64,),
+        
         "cnn_activation": "relu",
         "fcnet_activation": "relu",
         "post_fcnet_activation": "relu",
         "use_lstm": True,
         "lstm_use_prev_action": True,
         "lstm_use_prev_reward": False,
-        "lstm_cell_size": 2,
+        #"lstm_cell_size": 2,
+        "lstm_cell_size": 32,
         "shared_policy": False,
 
         # experiment trials
         "exp_name": args.exp,
         "stopping": {
-                    #"timesteps_total": 1000000,
+                    "timesteps_total": 100000000,
                     # "training_iteration": 1,
-                    "training_iteration": 2,
+                    #"training_iteration": 1000,
                     #"episode_reward_mean": 100,
         },
         "num_checkpoints": 5,
-        "checkpoint_interval": 10,
+        "checkpoint_interval": 100,
         "checkpoint_at_end": True,
         "results_dir": args.results_dir,
         "logging": args.logging,
