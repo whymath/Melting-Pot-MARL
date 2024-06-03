@@ -581,6 +581,8 @@ function Zapper:__init__(kwargs)
       {'penaltyForBeingZapped', args.numberType},
       {'rewardForZapping', args.numberType},
       {'removeHitPlayer', args.default(true), args.booleanType},
+      {'printZaps', args.default(false), args.booleanType},
+      {'printZapsNearEdibleRange', args.default(1), args.numberType},
   })
   Zapper.Base.__init__(self, kwargs)
 
@@ -592,6 +594,8 @@ function Zapper:__init__(kwargs)
   self._config.penaltyForBeingZapped = kwargs.penaltyForBeingZapped
   self._config.rewardForZapping = kwargs.rewardForZapping
   self._config.removeHitPlayer = kwargs.removeHitPlayer
+  self._config.printZaps = kwargs.printZaps
+  self._config.printZapsNearEdibleRange = kwargs.printZapsNearEdibleRange
 end
 
 function Zapper:addHits(worldConfig)
@@ -621,6 +625,24 @@ function Zapper:registerUpdaters(updaterRegistry)
           self._coolingTimer = self._coolingTimer - 1
         else
           if actions['fireZap'] == 1 then
+            -- this will slow down evaluation, but it does work...
+            if self._config.printZaps then
+              local avatar = self.gameObject:getComponent('Avatar')
+              local index = avatar:getIndex()
+
+              -- print out that the avatar zapped
+              print("avatar: " .. index .. " zapped!")
+
+              -- print out if the avatar zapped near an edible component
+              local transform = self.gameObject:getComponent('Transform')
+              local queryObjects = transform:queryDisc('lowerPhysical', self._config.printZapsNearEdibleRange)
+              for _, obj in ipairs(queryObjects) do
+                if (obj ~= nil and obj:hasComponent('Edible')) then
+                  print("avatar: " .. index .. " zapped near edible!")
+                  break
+                end
+              end
+            end
             self._coolingTimer = self._config.cooldownTime
             self.gameObject:hitBeam(
                 'zapHit', self._config.beamLength, self._config.beamRadius)
@@ -658,9 +680,15 @@ function Zapper:onHit(hittingGameObject, hitName)
     if self.playerZapMatrix then
       self.playerZapMatrix(zappedIndex, zapperIndex):add(1)
     end
+    -- need to find how to access this, where is this being stored? Observations?
     events:add('zap', 'dict',
                'source', zapperAvatar:getIndex(),  -- int
                'target', zappedAvatar:getIndex())  -- int
+    if self._config.printZaps then
+      -- print out that the avatar zapped and hit another avatar
+      --print("avatar: " .. zapperAvatar.getIndex() .. " zapped and hit avatar: " .. zappedAvatar.getIndex())
+      print("avatar: " .. zapperIndex .. " zapped and hit!")
+    end
     zappedAvatar:addReward(self._config.penaltyForBeingZapped)
     zapperAvatar:addReward(self._config.rewardForZapping)
     if self._config.removeHitPlayer then

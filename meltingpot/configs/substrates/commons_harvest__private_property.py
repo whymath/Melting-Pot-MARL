@@ -499,6 +499,8 @@ def create_avatar_object(player_idx: int,
                   "framesTillRespawn": 4,
                   "penaltyForBeingZapped": 0,
                   "rewardForZapping": 0,
+                  # debug print zaps
+                  "printZaps": True,
               }
           },
           {
